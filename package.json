@@ -1,0 +1,8 @@
+{
+  "name": "FacebookWall",
+  "version": "1",
+  "description": "Facebook Wall Project",
+  "main": "index.js",
+  "author": "Thuyen",
+  "license": "MIT"
+}
