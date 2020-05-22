@@ -6,7 +6,7 @@ import Login from './components/Login.js';
 class WelcomePage extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div className="container">
           <h2>Facebook Wall</h2>
           <div className="row">
@@ -14,8 +14,7 @@ class WelcomePage extends Component {
             <Login />
           </div>
         </div>
-
-      </div>
+      </React.Fragment>
     )
   }
 }

@@ -4,11 +4,11 @@ import Post from './components/Post';
 class PostList extends Component{
   render(){
     return(
-      <div>
+      <React.Fragment>
       <Post />
       <Post />
       <Post />
-      </div>
+      </React.Fragment>
     );
   }
 }

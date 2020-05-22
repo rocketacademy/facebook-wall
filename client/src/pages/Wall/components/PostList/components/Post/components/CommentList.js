@@ -5,11 +5,11 @@ import CommentForm from './CommentForm.js'
 class CommentList extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Comment />
         <Comment />
         <CommentForm />
-      </div>
+      </React.Fragment>
     );
   }
 }
