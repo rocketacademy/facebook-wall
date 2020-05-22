@@ -14,18 +14,18 @@ class App extends React.Component {
 
   render() {
     return (
-<Router>
-  <Switch>
-  <Route exact path="/" component={WelcomePage}/>
-  <Route exact path="/wall" component={Wall}/>
-  <Route component={NotFound} />
-  </Switch>
-  </Router>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={WelcomePage} />
+          <Route exact path="/wall" component={Wall} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
     )
   }
 }
 
- ReactDOM.render(
+ReactDOM.render(
   <App />,
   document.getElementById('root')
 );

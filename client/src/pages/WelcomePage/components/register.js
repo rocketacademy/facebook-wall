@@ -24,7 +24,7 @@ class Register extends Component {
         <div>
           <form onSubmit="">
             <h5> Register</h5>
-            
+
             <div className="form-group">
               <label htmlFor="register-firstname">First Name</label>
               <input type="text" className="form-control" id="register-firstname" onChange="" value={this.state.firstname} name="firstname" placeholder="First Name" />
