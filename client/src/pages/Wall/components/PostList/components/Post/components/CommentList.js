@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Comment from './comment.js';
-import CommentForm from './commentform.js'
+import Comment from './Comment.js';
+import CommentForm from './CommentForm.js'
 
 class CommentList extends Component {
   render() {

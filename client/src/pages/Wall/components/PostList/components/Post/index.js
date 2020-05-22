@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CommentList from './components/commentlist.js';
+import CommentList from './components/CommentList.js';
 
 class Post extends Component {
   render() {

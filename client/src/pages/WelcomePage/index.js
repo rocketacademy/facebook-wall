@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import Register from './components/register.js';
-import Login from './components/login.js';
+import Register from './components/Register.js';
+import Login from './components/Login.js';
 
 class WelcomePage extends Component {
   render() {
