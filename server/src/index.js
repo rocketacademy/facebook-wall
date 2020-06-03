@@ -1,12 +1,13 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import os from 'os'
-
+import cors from 'cors'
 import db from './models'
 import api from './routes/api'
 
 const app = express()
 
+app.use(cors())
 // Parse json data.
 app.use(bodyParser.json())
 

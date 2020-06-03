@@ -18,6 +18,8 @@ const sequelize = new Sequelize(
 
 const db = {
   posts: sequelize.import('./post'),
+  users: sequelize.import('./user'),
+  comments: sequelize.import('./comment'),
   sequelize: sequelize,
   Sequelize: Sequelize,
 }
