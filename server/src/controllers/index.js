@@ -59,15 +59,12 @@ export function getAllPosts(_, res) {
 
 // Create a new user.
 export function createUser(req, res) {
-	console.log(req.query);
-	console.log(req.body);
-
 	// Check that required fields are present.
-	if (!(req.body.firstname && req.body.lastname && req.body.email && req.body.password && req.body.avatarurl)) {
-		res.send("lmao")
+	if (!(req.body.firstname && req.body.lastname && req.body.email && req.body.password && req.body.avatarurl)) {	
 		res.sendStatus(400)
 		return
 	}
+	console.log(req.body)
 	const user = {
 		firstname: req.body.firstname,
 		lastname: req.body.lastname,

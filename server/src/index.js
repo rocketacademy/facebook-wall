@@ -7,12 +7,19 @@ import api from './routes/api'
 
 const app = express()
 
-app.use(cors())
-// Parse json data.
-app.use(bodyParser.json())
+app.use(cors({
+  origin: '*',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}))
+
 
 // Parse url encoded data.
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// Parse json data.
+app.use(bodyParser.json())
 
 // Serve static web content from build.
 app.use(express.static('dist'))

@@ -9,7 +9,6 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-
       errors: null,
       userLoggedIn: false,
     }
@@ -25,7 +24,7 @@ class Login extends Component {
   handleSubmit(event) {
     let _this = this;
     event.preventDefault();
-    axios(`penguin:8080/api/login`, {
+    axios(`penguin:8080/api/users/login`, {
       method: 'post',
       data: {
         email: this.state.email,
@@ -43,6 +42,7 @@ class Login extends Component {
       })
 
   }
+
   render() {
     return (
       <div className="col-md">

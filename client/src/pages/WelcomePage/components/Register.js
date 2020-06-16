@@ -7,19 +7,39 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      firstname: 'ok',
-      lastname: 'ok',
-      email: 'ok',
-      password: 'ok',
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
 
       errors: null,
 
       registrationCompleted: false,
 
     }
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    let _this = this;
+    axios.post('penguin:8080/api/users/register/', {
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email,
+      password: this.state.password,
+      avatarurl: "https://vnn-imgs-f.vgcloud.vn/2020/03/23/11/trend-avatar-1.jpg",
+    })
+      .then(function (response) {
+        console.log(response);
+        if (response.data.errors) {
+          _this.setState({ errors: response.data.errors })
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }
 
   handleInputChange = event => {
@@ -28,21 +48,6 @@ class Register extends Component {
     });
 
   }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    axios('penguin:8080/api/users/register/', {
-      method: 'post',
-      data: {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        email: this.state.email,
-        password: this.state.password,
-        avatarurl: "https://upload.wikimedia.org/wikipedia/commons/0/08/South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_%28Pygoscelis_antarctica%29_04.jpg",
-      }
-    })
-  }
-
   render() {
     return (
       <div className="col-md">

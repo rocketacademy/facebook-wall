@@ -2,24 +2,23 @@ import React, { Component } from 'react';
 import CommentList from './components/CommentList.js';
 
 class Post extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      id: props.id,
+      owner: props.owner,
+      content: props.content,
+      comments: [],
+    }
+  }
   render() {
     return (
       <div class="card border-primary my-3">
         <div class="card-body">
-          <p class="font-weight-bold">User name</p>
-          <p class="font-weight-light">8:30am 20/2/2222</p>
-          <p class="font-weight-normal">
-            "When the world's getting hard
-            I will go to wherever you are
-            Running blind in the dark
-            I will go to wherever you are
-            Wherever you are
-            That's where I'll be
-            Wherever you are
-            That's where I'll be"
-          </p>
+          <p class="font-weight-bold">{this.state.owner}</p>
+          <p class="font-weight-normal">{this.state.content}</p>
           <hr />
-          <CommentList />
+          <CommentList comments = {this.props.comments}/>
         </div>
       </div>
     );
