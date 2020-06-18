@@ -24,7 +24,7 @@ class Register extends Component {
   handleSubmit = event => {
     event.preventDefault();
     let _this = this;
-    axios.post('penguin:8080/api/users/register/', {
+    axios.post('http://localhost:8080/api/users/register/', {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,

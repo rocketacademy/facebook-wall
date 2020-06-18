@@ -5,4 +5,5 @@ const router = Router()
 
 router.get('/', getCommentList)
 router.post('/', createComment)
+
 export default router

@@ -1,16 +1,16 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import os from 'os'
-import cors from 'cors'
 import db from './models'
 import api from './routes/api'
-
+import cors from 'cors'
 const app = express()
 
 app.use(cors({
-  origin: '*',
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  origin: ['http://localhost:3000'],
+  methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
   preflightContinue: false,
+  credentials: true, //allow setting of cookies,
   optionsSuccessStatus: 204
 }))
 

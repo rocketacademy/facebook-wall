@@ -5,8 +5,7 @@ export default function (sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true,
     },
-    poster: DataTypes.STRING,
-    title: DataTypes.STRING,
+    owner: DataTypes.STRING,
     content: DataTypes.STRING,
   })
   return Post
