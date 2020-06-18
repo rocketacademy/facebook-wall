@@ -40,7 +40,7 @@ render() {
     <div className="form-group">
     <textarea className="form-control" id="post-form" placeholder="Write a comment..."  onChange={this.handleInputChange} value={this.state.content}></textarea>
     </div>
-    <button type="submit" className="btn btn-primary float-right">Submit</button>\
+    <button type="submit" className="btn btn-primary float-right">Submit</button>
     </form>
     </div>
     </div>
