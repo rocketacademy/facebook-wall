@@ -16,6 +16,11 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this)
   }
+  componentDidMount(){
+    const isLoggin = localStorage.getItem('userLoggedIn') === 'true'; 
+    const userId = isLoggin ? localStorage.getItem('userId') : -1;
+    if(isLoggin)this.setState({userLoggedIn: true, userId: userId});
+  }
   handleInputChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -37,7 +42,7 @@ class Login extends Component {
             userLoggedIn: true,
             userId: response.data.userId,
           });
-          _this.componentDidMount();
+          _this.storeCurrentUser();
         }
         console.log(response);
       });
@@ -48,12 +53,12 @@ class Login extends Component {
       return <Redirect to={
         {
           pathname: '/wall/' + this.state.userId,
-          state: {currentUserId: this.state.userId},
+            state: {userLoggedIn:this.state.userLoggedIn,currentUserId: this.state.userId},
         }
       } />
     } 
   }
-  componentDidMount(){
+  storeCurrentUser(){
     localStorage.setItem('userLoggedIn',this.state.userLoggedIn);
     localStorage.setItem('userId',this.state.userId);
   }

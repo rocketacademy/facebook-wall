@@ -16,12 +16,19 @@ class PostForm extends Component {
       content: event.target.value,
     })
   }
+
   handleSubmit(event){
     let _this = this;
     event.preventDefault();
     axios.post('http://localhost:8080/api/posts/',{
       owner: this.state.ownerId,
       content: this.state.content,
+    }).then(function (response){
+      if(response.data.errors){
+      //TODO: do something
+      } else {
+        _this.props.updatePostList(); 
+      }
     });
   }
   render() {
