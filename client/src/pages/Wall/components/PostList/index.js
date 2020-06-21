@@ -19,7 +19,7 @@ class PostList extends Component {
           <>{
             this.state.posts.map(function (post) {
               return (
-                <Post id={post.id} ownerId={post.owner} content={post.content} />
+                <Post key={post.id} id={post.id} ownerId={post.owner} content={post.content} />
               )
             })
           }</> : null}

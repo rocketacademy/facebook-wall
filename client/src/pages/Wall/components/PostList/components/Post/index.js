@@ -19,8 +19,9 @@ class Post extends Component {
     this.getOwner();
     this.getCommentList();
   }
+  
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
+    if (this.props != prevProps) {
       this.setState({
         id: this.props.id,
         ownerId: this.props.ownerId,
@@ -28,10 +29,13 @@ class Post extends Component {
       });
       this.getOwner();
       this.getCommentList();
-      console.log(this.state.id);
-      console.log(this.props);
     }
   }
+  /*
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props !== nextProps || this.state !== nextState;
+  }
+  */
   getOwner() {
     let _this = this;
     axios.get('http://localhost:8080/api/users', {
@@ -74,7 +78,7 @@ class Post extends Component {
           {this.state.comments ?
             <>{this.state.comments.map(function (comment) {
               return (
-                <Comment ownerId={comment.owner} content={comment.content} />
+                <Comment key={comment.id} ownerId={comment.owner} content={comment.content} />
               )
             })}</> : null}
           <CommentForm postId={this.state.id} updateCommentList={this.getCommentList} />
