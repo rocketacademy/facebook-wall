@@ -32,13 +32,11 @@ class Register extends Component {
       avatarurl: "https://vnn-imgs-f.vgcloud.vn/2020/03/23/11/trend-avatar-1.jpg",
     })
       .then(function (response) {
-        console.log(response);
         if (response.data.errors) {
           _this.setState({ errors: response.data.errors })
         }
       })
       .catch(function (error) {
-        console.log(error);
       })
   }
 

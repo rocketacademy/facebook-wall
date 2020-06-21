@@ -3,7 +3,7 @@ import './style.css';
 import axios from 'axios';
 
 class WallTop extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       ownerId: props.ownerId,
@@ -12,21 +12,21 @@ class WallTop extends Component {
     }
     this.getWallOwner();
   }
-  getWallOwner(){
+  getWallOwner() {
     let _this = this;
-    axios.get('http://localhost:8080/api/users',{
+    axios.get('http://localhost:8080/api/users', {
       params: {
         id: this.state.ownerId,
-    }}).then(function (response){
-      if(response.data.errors){
+      }
+    }).then(function (response) {
+      if (response.data.errors) {
 
       } else {
         _this.setState({
           displayName: response.data.firstname + " " + response.data.lastname,
           avatarurl: response.data.avatarurl,
-        })
+        });
       }
-      console.log(response);
     });
   }
   render() {

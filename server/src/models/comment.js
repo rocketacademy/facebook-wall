@@ -9,5 +9,5 @@ export default function (sequelize, DataTypes) {
     owner: DataTypes.INTEGER,
     content: DataTypes.STRING,
   })
-  return Comment
+  return Comment;
 }

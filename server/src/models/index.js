@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize'
+import Sequelize from 'sequelize';
 
 // Default credentials for local setup.
 const config = {
@@ -26,8 +26,8 @@ const db = {
 
 Object.keys(db).forEach((model) => {
   if ('associate' in db[model]) {
-    db[model].associate(db)
+    db[model].associate(db);
   }
 })
 
-export default db
+export default db;

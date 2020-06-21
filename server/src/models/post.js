@@ -8,5 +8,5 @@ export default function (sequelize, DataTypes) {
     owner: DataTypes.STRING,
     content: DataTypes.STRING,
   })
-  return Post
+  return Post;
 }

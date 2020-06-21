@@ -10,6 +10,11 @@ class CommentForm extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.postId !== prevProps.postId) {
+      this.setState({ postId: this.props.postId });
+    }
+  }
   handleInputChange(event) {
     this.setState({
       content: event.target.value,
@@ -30,7 +35,7 @@ class CommentForm extends Component {
           content: '',
         })
         _this.props.updateCommentList();
-    };
+      };
     }
     );
   }

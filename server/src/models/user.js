@@ -6,5 +6,5 @@ export default function (sequelize, DataTypes) {
   password: DataTypes.STRING,
   avatarurl: DataTypes.STRING,
   })
-  return User
+  return User;
 }

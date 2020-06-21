@@ -9,11 +9,10 @@ const Comment = db.comments
 
 // Create a new Post.
 export function createPost(req, res) {
-  console.log(req.body)
   // Check that required fields are present.
   if (!(req.body.owner && req.body.content)) {
-    res.sendStatus(400)
-    return
+    res.sendStatus(400);
+    return;
   }
   // Create Post from data.
   const post = {
@@ -23,14 +22,14 @@ export function createPost(req, res) {
   // Save Post in the database.
   Post.create(post)
     .then((data) => res.send(data))
-    .catch((_) => res.sendStatus(500))
+    .catch((_) => res.sendStatus(500));
 }
 
 // Delete a Post with id specified in req.
 export function deletePost(req, res) {
   if (!req.body.id) {
-    res.sendStatus(400)
-    return
+    res.sendStatus(400);
+    return;
   }
   Post.destroy({
     where: { id: id },
@@ -42,18 +41,23 @@ export function deletePost(req, res) {
         res.sendStatus(404)
       }
     })
-    .catch((_) => res.sendStatus(500))
+    .catch((_) => res.sendStatus(500));
 }
 
 // Retrieve all posts of an user from the databse.
 export function getPosts(req, res) {
-  if(!(req.query.ownerId)){
+  if (!(req.query.ownerId)) {
     res.status(400);
     return;
   }
-  Post.findAll({where:{owner: req.query.ownerId}})
+  Post.findAll({
+    where: { owner: req.query.ownerId },
+    order: [
+      ['createdAt', 'DESC']
+    ],
+  })
     .then((data) => res.send(data))
-    .catch((_) => res.sendStatus(500))
+    .catch((_) => res.sendStatus(500));
 }
 
 //
@@ -64,11 +68,10 @@ export function getPosts(req, res) {
 // Create a new user.
 export function createUser(req, res) {
   // Check that required fields are present.
-  if (!(req.body.firstname && req.body.lastname && req.body.email && req.body.password && req.body.avatarurl)) {	
-    res.sendStatus(400)
-    return
+  if (!(req.body.firstname && req.body.lastname && req.body.email && req.body.password && req.body.avatarurl)) {
+    res.sendStatus(400);
+    return;
   }
-  console.log(req.body)
   const user = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -79,40 +82,38 @@ export function createUser(req, res) {
   // Save the user in the database.
   User.create(user)
     .then((data) => res.send(data))
-    .catch((_) => res.sendStatus(500))
+    .catch((_) => res.sendStatus(500));
 }
 
 // Delete an user with id specified in req.
 export function deleteUser(req, res) {
-  res.send(req.quert)
   if (!req.body.email) {
-    res.sendStatus(400)
-    return
+    res.sendStatus(400);
+    return;
   }
   User.destroy({
-    where: { email: req.body.email},
+    where: { email: req.body.email },
   })
     .then((count) => {
       if (count) {
-        res.sendStatus(200)
+        res.sendStatus(200);
       } else {
-        res.sendStatus(404)
+        res.sendStatus(404);
       }
     })
-    .catch((_) => res.sendStatus(500))
+    .catch((_) => res.sendStatus(500));
 }
 
 // Find an user using email or id
 export function getAnUser(req, res) {
-  console.log(req.query)
-  if(req.query.email){
+  if (req.query.email) {
     User.findOne(
-      {where: { email: req.query.email}})
+      { where: { email: req.query.email } })
       .then((data) => res.send(data))
       .catch((_) => res.send("not found"));
   }
-  else if(req.query.id){
-    User.findOne({where:{id: req.query.id}})
+  else if (req.query.id) {
+    User.findOne({ where: { id: req.query.id } })
       .then((data) => res.send(data))
       .catch((_) => res.send("not found"));
   }
@@ -126,25 +127,24 @@ export function getAnUser(req, res) {
 // Login
 
 export function login(req, res) {
-  User.findOne({where:{
-    email: req.body.email,
-    password: req.body.password
-  }}).then(function (user) {
+  User.findOne({
+    where: {
+      email: req.body.email,
+      password: req.body.password
+    }
+  }).then(function (user) {
     if (!user) {
       let errors_value = {
         login: { msg: 'Wrong email or password' }
       }
       return res.send({ errors: errors_value })
     } else {
-      console.log(user);
-      //req.session.user = user;
       return res.send({ userId: user.id });
     }
     res.send(user);
 
   })
     .catch(function (error) {
-      console.log(error);
     })
 }
 
@@ -155,10 +155,9 @@ export function login(req, res) {
 
 // Create a new comment.
 export function createComment(req, res) {
-  console.log(req.body);
   if (!(req.body.postId && req.body.ownerId && req.body.content)) {
-    res.sendStatus(400)
-    return
+    res.sendStatus(400);
+    return;
   }
   const comment = {
     postId: req.body.postId,
@@ -167,14 +166,14 @@ export function createComment(req, res) {
   }
   Comment.create(comment)
     .then((data) => res.send(data))
-    .catch((_) => res.sendStatus(500))
+    .catch((_) => res.sendStatus(500));
 }
 
 // Delete a comment with id specified in req.
 export function deleteComment(req, res) {
   if (!req.body.id) {
-    res.sendStatus(400)
-    return
+    res.sendStatus(400);
+    return;
   }
   Comment.destroy({
     where: { id: req.body.id },
@@ -187,18 +186,17 @@ export function deleteComment(req, res) {
         res.sendStatus(404)
       }
     })
-    .catch((_) => res.sendStatus(500))
+    .catch((_) => res.sendStatus(500));
 }
 
 // Retrieve comment list of a post from the databse.
 
 export function getCommentList(req, res) {
-  console.log(req.query);
-  if(!(req.query.postId)){
+  if (!(req.query.postId)) {
     res.sendStatus(400);
     return;
   }
-  Comment.findAll({where:{ postId: req.query.postId }})
+  Comment.findAll({ where: { postId: req.query.postId } })
     .then((data) => res.send(data))
     .catch((_) => res.sendStatus(500));
 }
