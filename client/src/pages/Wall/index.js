@@ -34,6 +34,7 @@ class Wall extends Component {
     })
       .then(function (response) {
         if (response.data.errors) {
+          console.log(response.data.errors);
         } else {
           _this.setState({
             posts: response.data
@@ -47,12 +48,12 @@ class Wall extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar userLoggedIn={this.state.userLoggedIn} handleSignOut={this.handleSignOut} />
-        <div className="container p-5">
-          <WallTop ownerId={this.state.ownerId} />
-          {this.state.currentUserId.toString() === this.state.ownerId ? <PostForm ownerId={this.state.ownerId} updatePostList={this.getPost} /> : null}
-          <PostList posts={this.state.posts} />
-        </div>
+      <NavBar userLoggedIn={this.state.userLoggedIn} handleSignOut={this.handleSignOut} />
+      <div className="container p-5">
+      <WallTop ownerId={this.state.ownerId} />
+      {this.state.currentUserId.toString() === this.state.ownerId ? <PostForm ownerId={this.state.ownerId} updatePostList={this.getPost} /> : null}
+      <PostList posts={this.state.posts} />
+      </div>
       </React.Fragment>
     )
   }

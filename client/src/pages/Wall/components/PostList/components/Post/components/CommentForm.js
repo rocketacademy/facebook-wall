@@ -29,7 +29,7 @@ class CommentForm extends Component {
       content: this.state.content,
     }).then(function (response) {
       if (response.data.errors) {
-        //TODO
+        console.log(response.data.errors);
       } else {
         _this.setState({
           content: '',

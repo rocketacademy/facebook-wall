@@ -31,11 +31,6 @@ class Post extends Component {
       this.getCommentList();
     }
   }
-  /*
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props !== nextProps || this.state !== nextState;
-  }
-  */
   getOwner() {
     let _this = this;
     axios.get('http://localhost:8080/api/users', {
@@ -44,7 +39,7 @@ class Post extends Component {
       }
     }).then(function (response) {
       if (response.data.errors) {
-
+        console.log(response.data.errors);
       } else {
         _this.setState({
           displayName: response.data.firstname + " " + response.data.lastname,

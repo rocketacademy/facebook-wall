@@ -27,7 +27,7 @@ class Comment extends Component {
       }
     }).then(function (response) {
       if (response.data.errors) {
-
+        console.log(response.data.errors);
       } else {
         _this.setState({
           displayName: response.data.firstname + " " + response.data.lastname,

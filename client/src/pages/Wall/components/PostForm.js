@@ -25,7 +25,7 @@ class PostForm extends Component {
       content: this.state.content,
     }).then(function (response) {
       if (response.data.errors) {
-        //TODO: do something
+        console.log(response.data.errors);
       } else {
         _this.props.updatePostList();
         _this.setState({ content: '' });
