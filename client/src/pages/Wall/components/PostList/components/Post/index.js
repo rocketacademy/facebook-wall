@@ -1,25 +1,82 @@
 import React, { Component } from 'react';
-import CommentList from './components/CommentList.js';
+import Comment from './components/Comment.js';
+import CommentForm from './components/CommentForm.js';
+import axios from 'axios';
 
 class Post extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      id: props.id,
+      ownerId: props.ownerId,
+      displayName: '',
+      content: props.content,
+      comments: null,
+    }
+    this.getCommentList = this.getCommentList.bind(this);
+  }
+  componentDidMount() {
+    this.getOwner();
+    this.getCommentList();
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (this.props != prevProps) {
+      this.setState({
+        id: this.props.id,
+        ownerId: this.props.ownerId,
+        content: this.props.content,
+      });
+      this.getOwner();
+      this.getCommentList();
+    }
+  }
+  getOwner() {
+    let _this = this;
+    axios.get('http://localhost:8080/api/users', {
+      params: {
+        id: this.state.ownerId,
+      }
+    }).then(function (response) {
+      if (response.data.errors) {
+        console.log(response.data.errors);
+      } else {
+        _this.setState({
+          displayName: response.data.firstname + " " + response.data.lastname,
+        })
+      }
+    });
+  }
+  getCommentList() {
+    let _this = this;
+    axios.get('http://localhost:8080/api/comments/', {
+      params: {
+        postId: this.state.id,
+      }
+    }).then(function (response) {
+      if (response.data.errors) {
+        //TODO:
+      } else {
+        _this.setState({
+          comments: response.data,
+        });
+      }
+    });
+  }
   render() {
     return (
       <div class="card border-primary my-3">
         <div class="card-body">
-          <p class="font-weight-bold">User name</p>
-          <p class="font-weight-light">8:30am 20/2/2222</p>
-          <p class="font-weight-normal">
-            "When the world's getting hard
-            I will go to wherever you are
-            Running blind in the dark
-            I will go to wherever you are
-            Wherever you are
-            That's where I'll be
-            Wherever you are
-            That's where I'll be"
-          </p>
+          <p class="font-weight-bold">{this.state.displayName}</p>
+          <p class="font-weight-normal">{this.state.content}</p>
           <hr />
-          <CommentList />
+          {this.state.comments ?
+            <>{this.state.comments.map(function (comment) {
+              return (
+                <Comment key={comment.id} ownerId={comment.owner} content={comment.content} />
+              )
+            })}</> : null}
+          <CommentForm postId={this.state.id} updateCommentList={this.getCommentList} />
         </div>
       </div>
     );

@@ -17,7 +17,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/" component={WelcomePage} />
-          <Route exact path="/wall" component={Wall} />
+          <Route exact path="/wall/:id" component={Wall} />
           <Route component={NotFound} />
         </Switch>
       </Router>

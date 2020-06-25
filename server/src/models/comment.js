@@ -1,12 +1,13 @@
 export default function (sequelize, DataTypes) {
-  const Post = sequelize.define('post', {
+  const Comment = sequelize.define('comment', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    owner: DataTypes.STRING,
+    postId: DataTypes.INTEGER,
+    owner: DataTypes.INTEGER,
     content: DataTypes.STRING,
   })
-  return Post;
+  return Comment;
 }

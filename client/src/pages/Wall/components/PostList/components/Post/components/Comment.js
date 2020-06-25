@@ -1,15 +1,49 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 class Comment extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      ownerId: props.ownerId,
+      displayName: '',
+      content: props.content,
+    }
+    this.getOwner();
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      this.setState({
+        ownerId: this.props.ownerId,
+        content: this.props.content,
+      });
+      this.getOwner();
+    }
+  }
+  getOwner() {
+    let _this = this;
+    axios.get('http://localhost:8080/api/users', {
+      params: {
+        id: this.state.ownerId,
+      }
+    }).then(function (response) {
+      if (response.data.errors) {
+        console.log(response.data.errors);
+      } else {
+        _this.setState({
+          displayName: response.data.firstname + " " + response.data.lastname,
+        });
+      }
+    });
+  }
   render() {
     return (
-      <div class="card my-2">
-        <div class="card-body">
-          <p class="font-weight-bold">USERNAME</p>
-          <p class="font-weight-normal">lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div className="card my-2">
+        <div className="card-body">
+          <p className="font-weight-bold">{this.state.displayName}</p>
+          <p className="font-weight-normal">{this.state.content}</p>
         </div>
       </div>
-    );
+    )
   }
 }
 export default Comment;

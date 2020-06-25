@@ -1,17 +1,40 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userLoggedIn: props.userLoggedIn,
+    }
+    this.signOut = this.signOut.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.userLoggedIn !== prevProps.userLoggedIn) {
+      this.setState({ userLoggedIn: this.props.userLoggedIn });
+    }
+  }
+  signOut() {
+    localStorage.setItem('userLoggedIn', false);
+    this.setState({ userLoggedIn: false });
+    this.props.handleSignOut();
+  }
   render() {
     return (
-      <nav class="navbar navbar-light bg-light mx-5">
-        <a class="navbar-brand">Facebook Wall</a>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Find a friend" aria-label="Search" />
-          <button class="btn my-2 my-sm-0" type="submit">Search</button>
-          <button class="btn btn-danger my-2 my-sm-0 ml-2" type="submit">Sign out</button>
-        </form>
+      <nav className="navbar navbar-light bg-light">
+        <a class="navbar-brand" href='/#'>Facebook Wall</a>
+        {this.state.userLoggedIn ?
+          <button class="btn btn-danger my-2 my-sm-0 ml-2" onClick={this.signOut} >Sign out</button>
+          :
+          <Link to='/'>
+            <button class="btn btn-danger my-2 my-sm-0 ml-2">Log in</button>
+          </Link>
+        }
       </nav>
     );
   }
 }
 export default NavBar;
+
+
+
